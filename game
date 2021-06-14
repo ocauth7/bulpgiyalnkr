@@ -1,0 +1,366 @@
+using System;
+
+namespace GAME_LK
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Beep();
+            Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + " b u l p g i y a ".Length / 2) + "}", " b u l p g i y a "));
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "      fv-01       ".Length / 2) + "}", "      fv-01       "));
+            Console.ResetColor();
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "choose a difficulty".Length / 2) + "}", "choose a difficulty"));
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "<1> 20 guesses       [EASY]".Length / 2) + "}", "<1> 20 guesses       [EASY]"));
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "<2> 10 guesses     [MEDIUM]".Length / 2) + "}", "<2> 10 guesses     [MEDIUM]"));
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "<3>  3 guesses       [HARD]".Length / 2) + "}", "<3>  3 guesses       [HARD]"));
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "<4>  DEBUG MODE       [UNLIMITED]".Length / 2) + "}", "<4>  DEBUG MODE       [UNLIMITED]"));
+            Console.ResetColor();
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.WriteLine("");
+
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write("                                                         >");
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write(" ");
+
+            //settings
+            //ideas
+            /*
+            hints: how does the hint work?; it will add the first two numbers and add the last two numbers
+            example: generated number is 2314
+            hint will be 2+3 and 1+4
+            it will print out 5 and 5
+            and the next hint will make it more clear
+            */
+
+            int d1, d2, d3, d4;
+            int choice;
+            d1 = 20;
+            d2 = 10;
+            d3 = 5;
+            d4 = 100;
+            int diff = 0;
+
+            choice = int.Parse(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    diff = 20;
+                    break;
+                case 2:
+                    diff = 10;
+                    break;
+                case 3:
+                    diff = 3;
+                    break;
+                case 4:
+                    diff = 100;
+                    break;
+                default:
+                    Console.Beep();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.BackgroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("crash> incorret input           ");
+                    Console.Beep();
+                    Console.Write("correct inputs are ");
+                    Console.Write(" 1 || 2 || 3 ");
+                    Console.ResetColor();
+                    Console.WriteLine("");
+                    Console.WriteLine("");
+                    Console.Beep();
+                    Console.Beep();
+                    Console.Beep();
+                    Console.Beep();
+                    return;
+                    break;
+            }
+
+            int gl;
+            gl = diff;
+
+
+            Random rnd = new Random();
+
+            int random1 = rnd.Next(1, 6);
+
+            int random2 = rnd.Next(1, 6);
+
+            while (random1 == random2)
+            {
+                random2 = rnd.Next(1, 6);
+            }
+
+            int random3 = rnd.Next(1, 6);
+
+            while (random3 == random2 || random1 == random3)
+            {
+                random3 = rnd.Next(1, 6);
+            }
+            int random4 = rnd.Next(1, 6);
+
+            while (random4 == random3 || random4 == random2 || random4 == random1)
+            {
+                random4 = rnd.Next(1, 6);
+            }
+
+            int r1 = random1;
+            int r2 = random2;
+            int r3 = random3;
+            int r4 = random4;
+
+            //instructions for the game
+
+            Console.WriteLine("");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "I N S T R U C T I O N S".Length / 2) + "}", "I N S T R U C T I O N S"));
+            Console.ResetColor();
+            Console.WriteLine("");
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "the computer has generated 4 numbers".Length / 2) + "}", "the computer has generated 4 numbers"));
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "each number is between 1-6".Length / 2) + "}", "each number is between 1-6"));
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "guess the combination".Length / 2) + "}", "guess the combination"));
+            Console.WriteLine("");
+
+            if (choice == 1)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("                                                > you have " + diff + " guesses <");
+            }
+            if (choice == 2)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("                                                > you have " + diff + " guesses <");
+            }
+            if (choice == 3)
+            {
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("                                                > you have " + diff + " guesses <");
+            }
+            if (choice == 4)
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "> DEBUG MODE <".Length / 2) + "}", "> DEBUG MODE <"));
+            }
+            Console.ResetColor();
+            Console.WriteLine("");
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "if you hit one of the numbers it's going to mark as a hit".Length / 2) + "}", "if you hit one of the numbers it's going to mark as a hit"));
+            Console.WriteLine("");
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "if you have guesses one of the numbers".Length / 2) + "}", "if you have guesses one of the numbers"));
+            Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "but it's not in the right placement it's going to mark as a miss".Length / 2) + "}", "but it's not in the right placement it's going to mark as a miss"));
+            Console.WriteLine("");
+            Console.WriteLine("");
+            if (choice == 4)
+            {
+                Console.Clear();
+                Console.WriteLine(diff + " guesses" + "hints");
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "GENERATED NUMBERS ARE".Length / 2) + "}", "GENERATED NUMBERS ARE"));
+                Console.WriteLine();
+                Console.WriteLine("                                                           " + r1);
+                Console.WriteLine("                                                           " + r2);
+                Console.WriteLine("                                                           " + r3);
+                Console.WriteLine("                                                           " + r4);
+                Console.WriteLine();
+                Console.WriteLine();
+
+
+            }
+
+            //loops for amount of guesses you have chosen
+
+            int guess;
+            guess = 0;
+
+            int miss;
+            int hit;
+
+            miss = 0;
+            hit = 0;
+
+            for (int i = 1; i < diff || i == diff; i++)
+            {
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "ENTER YOUR GUESS".Length / 2) + "}", "ENTER YOUR GUESS"));
+                Console.WriteLine(" ");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("                                                         > ");
+                Console.ResetColor();
+
+                guess = int.Parse(Console.ReadLine());
+
+                gl = gl - 1;
+
+                int g1 = guess / 1000;
+                int g2 = guess / 100 - g1 * 10;
+                int g3 = guess / 10 - g1 * 100 - g2 * 10;
+                int g4 = guess - g1 * 1000 - g2 * 100 - g3 * 10;
+
+                if (g1 == r1)
+                {
+                    hit = hit + 1;
+                }
+                if (g2 == r2)
+                {
+                    hit = hit + 1;
+                }
+                if (g3 == r3)
+                {
+                    hit = hit + 1;
+                }
+                if (g4 == r4)
+                {
+                    hit = hit + 1;
+                }
+                if (g1 == r2 || g1 == r3 || g1 == r4)
+                {
+                    miss = miss + 1;
+                }
+                if (g2 == r1 || g2 == r3 || g2 == r4)
+                {
+                    miss = miss + 1;
+                }
+                if (g3 == r1 || g3 == r2 || g3 == r4)
+                {
+                    miss = miss + 1;
+                }
+                if (g4 == r1 || g4 == r2 || g4 == r3)
+                {
+                    miss = miss + 1;
+                }
+                if (g1 == r1 && g2 == r2 && g3 == r3 && g4 == r4)
+                {
+                    Console.WriteLine(" ");
+                    Console.WriteLine(" ");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("                         *");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("                                *");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("           *");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write("  *");
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.Write("                            *");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write("                                *");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("                 *");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.Beep();
+                    Console.WriteLine("");
+                    Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "YOU WON".Length / 2) + "}", "YOU WON"));
+                    Console.WriteLine("");
+                    Console.Beep();
+                    Console.Beep();
+                    Console.Beep();
+                    Console.Beep();
+                    Console.Beep();
+                    Console.Beep();
+                    Console.Beep();
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.Write("                         *");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.Write("                                *");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write("           *");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write("                  *");
+                    Console.ForegroundColor = ConsoleColor.Magenta;
+                    Console.Write("                        *");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.Write("                                *");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("                 *");
+                    Console.ResetColor();
+                    Console.WriteLine(" ");
+                    Console.ForegroundColor = ConsoleColor.Black;
+
+                    return;
+
+                }
+
+                Console.WriteLine("");
+                Console.WriteLine("");
+
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.Write("                                                YOU HAVE ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(gl);
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.Write(" GUESSES LEFT");
+
+                Console.WriteLine("");
+                Console.WriteLine("");
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("                                                           |");
+                Console.WriteLine("                                                      HITS | MISSES");
+                Console.WriteLine("                                                    -------|--------");
+                Console.WriteLine("                                                       " + hit + "   |    " + miss);
+                Console.WriteLine("                                                           |");
+
+                Console.WriteLine("");
+                Console.WriteLine("");
+
+                /*Console.ForegroundColor = ConsoleColor.Gray;
+                Console.Write("                                                you have ");
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write(gl);
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.Write(" guesses left");
+                Console.WriteLine("");
+                Console.ForegroundColor = ConsoleColor.Gray;
+                Console.WriteLine("");
+                Console.WriteLine("                                                        misses: " + miss);
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.WriteLine("                                                        hits: " + hit);
+                Console.WriteLine("");*/
+
+                hit = 0;
+                miss = 0;
+
+
+                if (gl == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "x_x x_x x_x x_x x_x x_x x_x x_x x_x x_x x_x".Length / 2) + "}", "x_x x_x x_x x_x x_x x_x x_x x_x x_x x_x x_x"));
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine(" ");
+                    Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "YOU LOST".Length / 2) + "}", "YOU LOST"));
+                    Console.Beep();
+                    Console.WriteLine(" ");
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.Write("                                                        " + r1);
+                    Console.Write(" " + r2);
+                    Console.Write(" " + r3);
+                    Console.Write(" " + r4);
+                    Console.WriteLine(" ");
+                    Console.WriteLine(" ");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(String.Format("{0," + ((Console.WindowWidth / 2) + "x_x x_x x_x x_x x_x x_x x_x x_x x_x x_x x_x".Length / 2) + "}", "x_x x_x x_x x_x x_x x_x x_x x_x x_x x_x x_x"));
+                    Console.ForegroundColor = ConsoleColor.Black;
+
+                    return;
+                }
+            }
+
+
+
+
+        }
+    }
+}
